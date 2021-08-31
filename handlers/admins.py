@@ -1,30 +1,12 @@
 from asyncio.queues import QueueEmpty
-from cache.admins import set
+
 from pyrogram import Client
 from pyrogram.types import Message
 from callsmusic import callsmusic
-from queues import queues
-import traceback
-import os
-import sys
-from pyrogram.errors.exceptions.bad_request_400 import ChatAdminRequired
-from pyrogram.errors.exceptions.flood_420 import FloodWait
-from pyrogram import filters, emoji
-from config import BOT_USERNAME as BN
+
+from config import BOT_NAME as BN
 from helpers.filters import command, other_filters
 from helpers.decorators import errors, authorized_users_only
-from config import que, admins as a
-
-@Client.on_message(filters.command('reload'))
-async def update_admin(client, message):
-    global a
-    admins = await client.get_chat_members(message.chat.id, filter="administrators")
-    new_ads = []
-    for u in admins:
-        new_ads.append(u.user.id)
-    a[message.chat.id] = new_ads
-    await message.reply_text('𝗕𝗼𝘁 𝗥𝗲𝗹𝗼𝗮𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹🤞𝗘𝗻𝗷𝗼𝘆 🤨 **{}**'.format(message.chat.title))
-
 
 
 @Client.on_message(command("pause") & other_filters)
