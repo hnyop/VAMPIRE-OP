@@ -23,21 +23,12 @@ import aiofiles
 import ffmpeg
 from PIL import Image, ImageFont, ImageDraw
 
-if not HEROKU:
 
-    app = Client('ktgvc', api_id=api_id, api_hash=api_hash)
 
-else:
 
-    app = Client(SESSION_STRING, api_id=api_id, api_hash=api_hash)
 
-    @app.on_message(filters.text & cmd_filter('ping'))
- def ping(_, message):
-    start = datetime.now()
-    msg = await send('`Pong!`')
-    end = datetime.now()
-    latency = (end - start).microseconds / 1000
-    await msg.edit(f"**Pong!**\n`{latency} ms`")
+
+
 
 def transcode(filename):
     ffmpeg.input(filename).output("input.raw", format='s16le', acodec='pcm_s16le', ac=2, ar='48k').overwrite_output().run() 
