@@ -22,8 +22,15 @@ import aiofiles
 import ffmpeg
 from PIL import Image, ImageFont, ImageDraw
 
+if not HEROKU:
 
-@app.on_message(filters.text & cmd_filter('ping'))
+    app = Client('ktgvc', api_id=api_id, api_hash=api_hash)
+
+else:
+
+    app = Client(SESSION_STRING, api_id=api_id, api_hash=api_hash)
+
+    @app.on_message(filters.text & cmd_filter('ping'))
 async def ping(_, message):
     start = datetime.now()
     msg = await send('`Pong!`')
