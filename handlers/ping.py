@@ -1,7 +1,7 @@
 from datetime import datetime
 from time import time
 
-from pyrogram import Client, filters, emoji
+from pyrogram import client as USER
 from pyrogram.types import Message
 
 @app.on_message(filters.text & cmd_filter('ping'))
