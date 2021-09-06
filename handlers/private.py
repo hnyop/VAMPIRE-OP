@@ -2,7 +2,6 @@ from time import time
 from datetime import datetime
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from helpers.decorators import sudo_users_only
 
 from config import BOT_NAME as bn
 from helpers.filters import other_filters2
