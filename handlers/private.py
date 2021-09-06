@@ -1,8 +1,7 @@
 from time import time
 from datetime import datetime
-from helpers.filters import command
-from config import BOT_USERNAME
 from pyrogram import Client, filters
+from helpers.filters import command
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from helpers.decorators import sudo_users_only
 
@@ -59,21 +58,21 @@ async def start(_, message: Message):
      disable_web_page_preview=True
     )
 
-@Client.on_message(command(["start", f"start@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+@Client.on_message(filters.command("start") & ~filters.private & ~filters.channel)
 async def start(client: Client, message: Message):
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
     await message.reply_text(
-        f"""✅ **ᴢᴀɪᴅ ɪꜱ ʀᴜɴɴɪɴɢ**\n<b>💠 **ᴜᴘᴛɪᴍᴇ:**</b> `{uptime}`""",
+        f"""✅ **ʜᴇxᴏʀ ꜱᴇʀᴠᴇʀ ɪꜱ ʀᴜɴɴɪɴɢ**\n<b>💠 **ᴜᴘᴛɪᴍᴇ:**</b> `{uptime}`""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "✨ ɢʀᴏᴜᴘ", url=f"https://t.me/Zaid_Support"
+                        "✨ ɢʀᴏᴜᴘ", url=f"https://t.me/Prayagraj_Op"
                     ),
                     InlineKeyboardButton(
-                        "📣 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/Zaid_Updates"
+                        "📣 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/Prayagraj_Op"
                     )
                 ]
             ]
@@ -81,25 +80,24 @@ async def start(client: Client, message: Message):
     )
 
 
-@Client.on_message(command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
+@Client.on_message(filters.command("ping") & ~filters.private & ~filters.channel)
 async def ping_pong(client: Client, message: Message):
     start = time()
-    m_reply = await message.reply_text("ᴢ ᴘɪɴɴɢ...")
+    m_reply = await message.reply_text("ᴘɪɴɴɢ...")
     delta_ping = time() - start
     await m_reply.edit_text(
-        "𝚣 `ᴘᴏɴɢ!!`\n"
-        f"🇿  `{delta_ping * 1000:.3f} ᴍꜱ`"
+        "🌟`ᴘᴏɴɢ!!`\n"
+        f"✨  `{delta_ping * 1000:.3f} ᴍꜱ`"
     )
 
-
-@Client.on_message(command(["uptime", f"uptime@{BOT_USERNAME}"]) & ~filters.edited)
+@Client.on_message(filters.command("uptime") & ~filters.private & ~filters.channel)
 @sudo_users_only
 async def get_uptime(client: Client, message: Message):
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
     await message.reply_text(
-        "🤖 ᴢᴀɪᴅ ꜱᴛᴀᴛᴜꜱ:\n"
+        "🌳ʜᴇxᴏʀ ꜱᴛᴀᴛᴜꜱ:\n"
         f"• **ᴜᴘᴛɪᴍᴇ:** `{uptime}`\n"
         f"• **ꜱᴛᴀʀᴛ ᴛɪᴍᴇ:** `{START_TIME_ISO}`"
     )
