@@ -1,7 +1,10 @@
 from time import time
 from datetime import datetime
+from config import BOT_USERNAME, BOT_NAME, ASSISTANT_NAME, OWNER_NAME, UPDATES_CHANNEL, GROUP_SUPPORT
+from helpers.filters import command
 from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, Chat, CallbackQuery
+from helpers.decorators import sudo_users_only
 
 from config import BOT_NAME as bn
 from helpers.filters import other_filters2
@@ -56,25 +59,47 @@ async def start(_, message: Message):
      disable_web_page_preview=True
     )
 
-@Client.on_message(filters.command("hexor") & ~filters.private & ~filters.channel)
-async def gstart(_, message: Message):
-      await message.reply_text("""**𝗦𝗺𝗼𝗸𝗲𝗿 𝗠𝘂𝘀𝗶𝗰 𝗕𝗼𝘁 𝗢𝗻𝗹𝗶𝗻𝗲 𝗡𝗼𝘄\n🌠𝗛𝗲𝘅𝗼𝗿 𝗫𝗗 <3**""",
-      reply_markup=InlineKeyboardMarkup(
+@Client.on_message(command(["start", f"start@{BOT_USERNAME}"]) & filters.group & ~filters.edited)
+async def start(client: Client, message: Message):
+    current_time = datetime.utcnow()
+    uptime_sec = (current_time - START_TIME).total_seconds()
+    uptime = await _human_time_duration(int(uptime_sec))
+    await message.reply_text(
+        f"""✅ **ᴢᴀɪᴅ ɪꜱ ʀᴜɴɴɪɴɢ**\n<b>💠 **ᴜᴘᴛɪᴍᴇ:**</b> `{uptime}`""",
+        reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "🌼𝗦𝘂𝗽𝗽𝗼𝗿𝘁", url="https://t.me/SankiPublicEnjoy")
+                        "✨ ɢʀᴏᴜᴘ", url=f"https://t.me/Zaid_Support"
+                    ),
+                    InlineKeyboardButton(
+                        "📣 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/Zaid_Updates"
+                    )
                 ]
             ]
         )
-   )
+    )
+
 
 @Client.on_message(command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
 async def ping_pong(client: Client, message: Message):
     start = time()
-    m_reply = await message.reply_text("ᴘɪɴɴɢ...")
+    m_reply = await message.reply_text("ᴢ ᴘɪɴɴɢ...")
     delta_ping = time() - start
     await m_reply.edit_text(
         "𝚣 `ᴘᴏɴɢ!!`\n"
-        f"  `{delta_ping * 1000:.3f} ᴍꜱ`"
+        f"🇿  `{delta_ping * 1000:.3f} ᴍꜱ`"
+    )
+
+
+@Client.on_message(command(["uptime", f"uptime@{BOT_USERNAME}"]) & ~filters.edited)
+@sudo_users_only
+async def get_uptime(client: Client, message: Message):
+    current_time = datetime.utcnow()
+    uptime_sec = (current_time - START_TIME).total_seconds()
+    uptime = await _human_time_duration(int(uptime_sec))
+    await message.reply_text(
+        "🤖 ᴢᴀɪᴅ ꜱᴛᴀᴛᴜꜱ:\n"
+        f"• **ᴜᴘᴛɪᴍᴇ:** `{uptime}`\n"
+        f"• **ꜱᴛᴀʀᴛ ᴛɪᴍᴇ:** `{START_TIME_ISO}`"
     )
