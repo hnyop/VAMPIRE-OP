@@ -10,7 +10,7 @@
 
 ## ꜱᴛʀɪɴɢ ɴᴀᴍᴇ </h4>
 
-[![GenerateString](https://img.shields.io/badge/repl.it-generateString-brown)](https://replit.com/@Botsupport/PatriciaXmusic)
+[![GenerateString](https://img.shields.io/badge/repl.it-generateString-brown)](https://replit.com/@D15H4NT0P/VAMPIRE-MUSIC)
 
 
 
