@@ -18,9 +18,9 @@ jobs:
 
         with:
 
-          find: "820be03u38/Musicsanki"
+          find: "EsportRobot"
 
-          replace: "NANDAN-VAMPIRE/VAMPIRE-OP"
+          replace: "VampireRobot"
 
       - name: Create Pull Request
 
