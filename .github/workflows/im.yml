@@ -18,7 +18,7 @@ jobs:
 
         with:
 
-          find: "HEXOROP/Sankimusic"
+          find: "HEXOROP/Sankiimusic"
 
           replace: "NANDAN-VAMPIRE/VAMPIRE-OP"
 
