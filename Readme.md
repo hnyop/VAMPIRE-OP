@@ -1,4 +1,3 @@
-[![ʜᴇxᴏʀ](https://img.shields.io/badge/-%CA%9C%E1%B4%87x%E1%B4%8F%CA%80-yellowgreen)](https://t.me/SankiPublicEnjoy) 
 
 
 
@@ -7,7 +6,6 @@
 
 ## ᴅᴇᴘʟᴏʏ ʀᴀɪʟᴡᴀʏ ꜱᴇʀᴠᴇʀ </h4>
 
-[![Deploy+To+Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https://github.com/NANDAN-VAMPIRE/VAMPIRE-OP&envs=SESSION_NAME,BOT_TOKEN,BOT_NAME,API_ID,API_HASH,SUDO_USERS,DURATION_LIMIT)
 
 
 ꜱᴛʀɪɴɢ ɴᴀᴍᴇ:
